@@ -41,11 +41,8 @@
             </div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Profile-Edit-Form.js"></script>
-    <script src="assets/js/sidebar.js"></script>
-    <script src="assets/js/Table-With-Search.js"></script>
+    
+    <%@ include file="scripts.jsp" %>
 </body>
 
 </html>
