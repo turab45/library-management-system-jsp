@@ -26,37 +26,7 @@
 </head>
 
 <body>
-    <ul class="nav flex-column d-flex sidebar mobile-hid" style="background-color: rgb(31,40,81);">
-        <li class="nav-item logo-holder">
-            <div class="text-center text-white logo py-4 mx-4"><label style="font-family: Lora, serif;">MyLib</label><a class="text-white float-right" id="sidebarToggleHolder" href="#"><i class="fas fa-bars" id="sidebarToggle"></i></a></div>
-        </li>
-        <li class="nav-item"></li>
-        <li class="nav-item"></li>
-        <li class="nav-item"><a class="nav-link text-left text-white py-1 px-0" href="index.html"><i class="fa fa-dashboard mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span class="text-nowrap mx-2">Dashboard</span></a></li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-users mx-3"></i><span class="text-nowrap mx-2">Students</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
-            <div
-                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-student.html" style="font-family: Lora, serif;">Add Student</a><a class="dropdown-item text-white" role="presentation" href="#">View Students</a></div>
-        </li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-book mx-3"></i><span class="text-nowrap mx-2">Books</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
-            <div
-                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-book.html">Add Book</a><a class="dropdown-item text-white" role="presentation" href="view-books.html"><span>View Books</span></a><a class="dropdown-item text-white" role="presentation"
-                    href="#"><span>Issue Book</span></a></div>
-        </li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="far fa-list-alt mx-3"></i><span class="text-nowrap mx-2">Category</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
-            <div
-                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-category.html">Add Category</a><a class="dropdown-item text-white" role="presentation" href="view-category.html"><span>View Categories</span></a></div>
-        </li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-user-cog mx-3"></i><span class="text-nowrap mx-2">Permissions</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
-            <div
-                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-permission.html">Add Permission</a><a class="dropdown-item text-white" role="presentation" href="view-permissions.html">View Permission</a><a class="dropdown-item text-white"
-                    role="presentation" href="#">Assign Permission</a></div>
-        </li>
-        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-sliders-h mx-3"></i><span class="text-nowrap mx-2">Settings</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
-            <div
-                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="#"><span>My Profile</span></a></div>
-        </li>
-        <li class="nav-item"><a class="nav-link text-left text-white py-1 px-0" href="#"><i class="fas fa-sign-out-alt mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span class="text-nowrap mx-2">Log out</span></a></li>
-    </ul>
+   <%@ include file="navbar.jsp" %>  
     <div class="article-clean">
         <div class="container">
             <div class="row">

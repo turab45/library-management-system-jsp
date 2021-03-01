@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class dashboardServlet
+ * Servlet implementation class StudentServlet
  */
-@WebServlet("/dashboardServlet")
-public class dashboardServlet extends HttpServlet {
+@WebServlet("/StudentServlet")
+public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public dashboardServlet() {
+    public StudentServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -25,7 +26,7 @@ public class dashboardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("dashboard.jsp");
+		response.sendRedirect("add-student.jsp");
 	}
 
 	/**
