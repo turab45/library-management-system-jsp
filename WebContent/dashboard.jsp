@@ -1,5 +1,7 @@
+<%@page import="daoimpl.UserDaoImpl"%>
+<%@page import="dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%> 
 <!DOCTYPE html>
 <html>
 
@@ -10,31 +12,39 @@
     <%@ include file="links.jsp" %>  
 </head>
 
-<body style="background-color: #fff;">
+
+<% 
+	UserDAO usDaoImpl = new UserDaoImpl();
+
+%>
+
+
+<body style="font-family: Lora, serif;background-color: #fff;">
 <%@ include file="navbar.jsp" %>  
     <div></div>
     <div class="features-boxed" style="background-color: #fff;">
         <div class="container" style="background-color: #fff;">
             <div class="intro">
-                <h2 class="text-center">Features </h2>
-                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.</p>
+                <h2 class="text-center">MyLib </h2>
+                <p class="text-center">"I have always imagined that Paradise will be a kind of a Library."</p>
             </div>
             <div class="row justify-content-center features" style="background-color: #fff;">
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style="background-color: #fff;">
                     <div class="box" style="background-color: rgb(31,40,81);/*border-radius: 1px solid;*/border-radius: 30px;"><i class="fas fa-users icon" style="color: #fff;"></i>
-                        <h3 class="name" style="color: #fff;">Students</h3>
+                        <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-student.jsp">Students</a></h3>
                         <h3 class="name" style="color: #fff;">68</h3>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box" style="background-color: rgb(31,40,81);"><i class="fa fa-book icon" style="color: #fff;"></i>
-                        <h3 class="name" style="color: #fff;">Books</h3>
+                        <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-book.jsp">Books</a></h3>
+                        
                         <h3 class="name" style="color: #fff;">90</h3>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box" style="background-color: rgb(31,40,81);"><i class="fa fa-list-alt icon" style="color: #fff;"></i>
-                        <h3 class="name" style="color: #fff;">Issued Books</h3>
+                         <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-book.jsp">Issued Books</a></h3>
                         <h3 class="name" style="color: #fff;">34</h3>
                     </div>
                 </div>

@@ -152,6 +152,34 @@ public class UserDaoImpl implements UserDAO{
         }
         return id;
 	}
+	
+	@Override
+	public Integer getUserIdByEmailandPass(String email, String pass) {
+		Integer id = null;
+		ResultSet rs = null;
+        try {
+            
+            
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where email=? and password=?");
+            pstmt.setString(1, email);
+            pstmt.setString(2, pass);
+            
+            rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	
+            	
+            	id = rs.getInt("id");
+				
+				
+			}
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR: "+ex.getMessage());
+            ex.printStackTrace();
+        }
+        return id;
+	}
 
 	@Override
 	public List<User> getAllUser() {

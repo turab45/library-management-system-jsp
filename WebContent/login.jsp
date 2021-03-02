@@ -29,9 +29,9 @@
                                         <h4 class="text-dark mb-4">Welcome Back!</h4>
                                         <h2 class="text-dark mb-4">Login</h2>
                                     </div>
-                                    <form class="user">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" style="border-color: rgb(31,40,81);"></div>
-                                        <div class="form-group"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" style="border-color: rgb(31,40,81);"></div>
+                                    <form class="user" method="Post" action="Handle">
+                                        <div class="form-group"><input required class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" style="border-color: rgb(31,40,81);"></div>
+                                        <div class="form-group"><input required class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" style="border-color: rgb(31,40,81);"></div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small"></div>
                                         </div><button class="btn btn-block text-white btn-user" type="submit" style="background-color: rgb(31,40,81);/*border-color: rgb(31,40,81);*/">Login</button>

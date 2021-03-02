@@ -6,23 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>libraray-design</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/Article-Clean.css">
-    <link rel="stylesheet" href="assets/css/Bootstrap-4---Table-Fixed-Header.css">
-    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="assets/css/Profile-Edit-Form-1.css">
-    <link rel="stylesheet" href="assets/css/Profile-Edit-Form.css">
-    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
-    <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="assets/css/Table-With-Search-1.css">
-    <link rel="stylesheet" href="assets/css/Table-With-Search.css">
+    <title>My Profile</title>
+     <%@ include file="links.jsp" %> 
 </head>
 
 <body>
@@ -62,11 +47,7 @@
             </div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Profile-Edit-Form.js"></script>
-    <script src="assets/js/sidebar.js"></script>
-    <script src="assets/js/Table-With-Search.js"></script>
+    <%@ include file="scripts.jsp" %> 
 </body>
 
 </html>

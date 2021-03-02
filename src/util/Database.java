@@ -13,7 +13,7 @@ private static Connection conn = null;
             try {
                 
                 Class.forName("com.mysql.jdbc.Driver");
-                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_sys", "root", "root");
+                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/library-management-sys", "root", "root");
             } catch (Exception e) {
                 System.out.println("ERROR: "+e.getMessage());
                 e.printStackTrace();
