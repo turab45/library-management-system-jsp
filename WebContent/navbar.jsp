@@ -7,6 +7,10 @@
         <li class="nav-item"></li>
         <li class="nav-item"><a class="nav-link text-left text-white py-1 px-0" href="dashboard.jsp"><i class="fa fa-dashboard mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span class="text-nowrap mx-2">Dashboard</span></a></li>
         <li class="nav-item"></li>
+        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-user mx-3"></i><span class="text-nowrap mx-2">User</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
+            <div
+                class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-user.jsp" style="font-family: Lora, serif;">Add User</a><a class="dropdown-item text-white" role="presentation" href="view-user.jsp">View Users</a></div>
+        </li>
         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-left text-white py-1 px-0 position-relative" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-users mx-3"></i><span class="text-nowrap mx-2">Students</span><i class="fas fa-caret-down float-none float-lg-right fa-sm"></i></a>
             <div
                 class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="add-student.jsp">Add Student</a><a class="dropdown-item text-white" role="presentation" href="view-student.jsp">View Students</a></div>

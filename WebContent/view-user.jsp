@@ -6,34 +6,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Categories</title>
-     <%@ include file="links.jsp" %> 
+    <title>Users</title>
+    <%@ include file="links.jsp" %> 
 </head>
 
 <body style="margin: -20px 0px;background-color: #fff;">
-    <%@ include file="navbar.jsp" %>  
+    <%@ include file="navbar.jsp" %> 
     <div class="article-clean" style="background-color: #fff;">
         <div class="container" style="background-color: #fff;">
             <div class="intro">
-                <h1 class="text-center" style="color: rgb(31,40,81);font-weight: bold;">Category</h1>
+                <h1 class="text-center" style="color: rgb(31,40,81);font-weight: bold;">Users</h1>
                 <p class="text-center"> </p>
             </div>
             <div class="table-responsive shadow" style="background-color: #fff;">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th style="color: rgb(31,40,81);font-size: 15px;font-family: Lora, serif;">ID</th>
-                            <th style="color: rgb(31,40,81);font-size: 15px;">Category</th>
-                            <th style="color: rgb(31,40,81);font-size: 15px;">Create Date</th>
-                            <th style="color: rgb(31,40,81);font-size: 15px;">Created By</th>
-                            <th style="color: rgb(31,40,81);font-size: 15px;">Update Date</th>
-                            <th style="color: rgb(31,40,81);font-size: 15px;">Updated By</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;font-family: Lora, serif;">ID</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Name</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Email</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Password</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Create Date</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Created By</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Update Date</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;">Updated By</th>
                             <th class="text-center" colspan="2" style="color: rgb(31,40,81);font-size: 18px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="color: rgb(14,16,18);">Cell 1</td>
+                            <td style="color: rgb(14,16,18);">Cell 2</td>
+                            <td style="color: rgb(14,16,18);">Cell 2</td>
                             <td style="color: rgb(14,16,18);">Cell 2</td>
                             <td style="color: rgb(14,16,18);">Cell 2</td>
                             <td style="color: rgb(14,16,18);">Cell 2</td>
@@ -48,7 +52,7 @@
             </div>
         </div>
     </div>
-     <%@ include file="scripts.jsp" %> 
+   <%@ include file="scripts.jsp" %> 
 </body>
 
 </html>
