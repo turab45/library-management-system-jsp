@@ -8,6 +8,10 @@ public class Issue {
 	private Student student;
 	private Date issueDate;
 	private User issuedBy;
+	private Role createdBy;
+	private Date createDate;
+	private Role updatedBy;
+	private Date updateDate;
 	private int status;
 	public Integer getId() {
 		return id;
@@ -44,6 +48,30 @@ public class Issue {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public Role getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Role createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public Role getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(Role updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	
 	

@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="daoimpl.BookDaoImpl"%>
+<%@page import="dao.BookDao"%>
+<%@page import="models.*"%>
 <%@page import="daoimpl.UserDaoImpl"%>
 <%@page import="dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,6 +19,9 @@
 
 <% 
 	UserDAO usDaoImpl = new UserDaoImpl();
+	BookDao bookDaoImpl = new BookDaoImpl();
+	
+	List<Book> allBooks = bookDaoImpl.getAllBook();
 
 %>
 
@@ -39,7 +46,7 @@
                     <div class="box" style="background-color: rgb(31,40,81);"><i class="fa fa-book icon" style="color: #fff;"></i>
                         <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-book.jsp">Books</a></h3>
                         
-                        <h3 class="name" style="color: #fff;">90</h3>
+                        <h3 class="name" style="color: #fff;"><%= allBooks.size()%></h3>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
