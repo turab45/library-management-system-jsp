@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDAO{
         try {
             
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where id=?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where id=? and status > 0");
            
             pstmt.setInt(1, id);
             
@@ -133,7 +133,7 @@ public class UserDaoImpl implements UserDAO{
         try {
             
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where name=?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where name=? and status > 0");
             pstmt.setString(1, name);
             
             rs = pstmt.executeQuery();
@@ -160,7 +160,7 @@ public class UserDaoImpl implements UserDAO{
         try {
             
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where email=? and password=?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user where email=? and password=? and status > 0");
             pstmt.setString(1, email);
             pstmt.setString(2, pass);
             
@@ -188,7 +188,7 @@ public class UserDaoImpl implements UserDAO{
         try {
             
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user WHERE status > 0");
             
             rs = pstmt.executeQuery();
             
