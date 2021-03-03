@@ -6,6 +6,13 @@
 <%@page import="dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%> 
+    
+ <%
+ session = request.getSession();
+ User user = (User) session.getAttribute("user");
+ 
+ if(user != null){
+ %>
 <!DOCTYPE html>
 <html>
 
@@ -62,4 +69,7 @@
     <%@ include file="scripts.jsp" %>
 </body>
 
+<%}else{
+	response.sendRedirect("login.jsp");
+}%>
 </html>

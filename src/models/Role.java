@@ -8,9 +8,9 @@ public class Role {
 	private Integer id;
 	private String role;
 	private Date createDate;
-	private Integer createdBy;
+	private Role createdBy;
 	private Date updateDate;
-	private Integer updatedBy;
+	private Role updatedBy;
 	private int status;
 	public Integer getId() {
 		return id;
@@ -30,10 +30,10 @@ public class Role {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public Integer getCreatedBy() {
+	public Role getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(Integer createdBy) {
+	public void setCreatedBy(Role createdBy) {
 		this.createdBy = createdBy;
 	}
 	public Date getUpdateDate() {
@@ -42,10 +42,10 @@ public class Role {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	public Integer getUpdatedBy() {
+	public Role getUpdatedBy() {
 		return updatedBy;
 	}
-	public void setUpdatedBy(Integer updatedBy) {
+	public void setUpdatedBy(Role updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 	public int getStatus() {

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
+
 import dao.UserDAO;
 import daoimpl.UserDaoImpl;
 import models.User;
@@ -18,44 +20,61 @@ import models.User;
 @WebServlet("/Handle")
 public class HandleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	UserDAO userDaoImpl = new UserDaoImpl();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HandleServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String useremail = request.getParameter("email");
-		String pass = request.getParameter("password");
-		
-		Integer id = userDaoImpl.getUserIdByEmailandPass(useremail, pass);
-		
-		if (id != null) {
-			User user = userDaoImpl.getUserById(id);
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			
-			response.sendRedirect("dashboard.jsp");
-		}else {
-			response.getWriter().print("Email & Password incorrect");
-		}
-		
-		
+	public HandleServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String useremail = request.getParameter("email");
+		String pass = request.getParameter("password");
+		String action = request.getParameter("action");
+
+		switch (action) {
+		case "login":
+			Integer id = userDaoImpl.getUserIdByEmailandPass(useremail, pass);
+
+			if (id != null) {
+				User user = userDaoImpl.getUserById(id);
+
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);
+
+				response.sendRedirect("dashboard.jsp");
+			} else {
+				response.getWriter().print("Email & Password incorrect");
+			}
+
+			break;
+		case "logout":
+			
+				HttpSession session = request.getSession();
+				session.invalidate();
+				response.sendRedirect("login.jsp");
+			
+			break;
+
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

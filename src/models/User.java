@@ -7,11 +7,14 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private Role role;
 	private Date createDate;
 	private Role createdBy;
 	private Date updateDate;
 	private Role updatedBy;
 	private int status;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -65,6 +68,12 @@ public class User {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

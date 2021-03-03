@@ -23,12 +23,13 @@ public class UserDaoImpl implements UserDAO{
             
             java.sql.Date createdDate = new Date(user.getCreateDate().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user(name,email,password,create_date,created_by,status) VALUES(?,?,?,?,?,1)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user(name,email,password,role,create_date,created_by,status) VALUES(?,?,?,?,?,?,1)");
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
-            pstmt.setDate(4, createdDate);
-            pstmt.setInt(5, user.getCreatedBy().getId());
+            pstmt.setInt(4, user.getRole().getId());
+            pstmt.setDate(5, createdDate);
+            pstmt.setInt(6, user.getCreatedBy().getId());
            
                         
             row = pstmt.executeUpdate();
@@ -51,9 +52,10 @@ public class UserDaoImpl implements UserDAO{
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
-            pstmt.setDate(4, updatedDate);
-            pstmt.setInt(5, user.getUpdatedBy().getId());
-            pstmt.setInt(6, user.getId());
+            pstmt.setInt(4, user.getRole().getId());
+            pstmt.setDate(5, updatedDate);
+            pstmt.setInt(6, user.getUpdatedBy().getId());
+            pstmt.setInt(7, user.getId());
            
                         
             row = pstmt.executeUpdate();
@@ -106,11 +108,15 @@ public class UserDaoImpl implements UserDAO{
 				Role r2 = new Role();
 				r2.setId(rs.getInt("updated_by"));
             	
+				Role userRole = new Role();
+				userRole.setId(rs.getInt("role"));
+				
 				user = new User();
 				user.setId(rs.getInt("id"));
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
+				user.setRole(userRole);
 				user.setCreateDate(rs.getDate("create_date"));
 				user.setUpdateDate(rs.getDate("update_date"));
 				user.setCreatedBy(r1);
@@ -199,12 +205,16 @@ public class UserDaoImpl implements UserDAO{
 				r1.setId(rs.getInt("created_by"));
 				Role r2 = new Role();
 				r2.setId(rs.getInt("updated_by"));
+				
+				Role userRole = new Role();
+				userRole.setId(rs.getInt("role"));
             	
 				User user = new User();
 				user.setId(rs.getInt("id"));
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
+				user.setRole(userRole);
 				user.setCreateDate(rs.getDate("create_date"));
 				user.setUpdateDate(rs.getDate("update_date"));
 				user.setCreatedBy(r1);

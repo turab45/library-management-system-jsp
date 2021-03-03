@@ -142,7 +142,7 @@ public class CategoryDaoImpl implements CategoryDao{
                         
             rs = pstmt.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
 				Category category = new Category();
 				category.setId(rs.getInt("id"));
 				category.setCategory(rs.getString("category"));

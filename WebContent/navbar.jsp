@@ -33,5 +33,5 @@
             <div
                 class="dropdown-menu border-0 animated fadeIn" role="menu"><a class="dropdown-item text-white" role="presentation" href="my-profile.jsp"><span>My Profile</span></a></div>
         </li>
-        <li class="nav-item"><a class="nav-link text-left text-white py-1 px-0" href="#"><i class="fas fa-sign-out-alt mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span class="text-nowrap mx-2">Log out</span></a></li>
+        <li class="nav-item"><a class="nav-link text-left text-white py-1 px-0" href="Handle?action='logout'"><i class="fas fa-sign-out-alt mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span class="text-nowrap mx-2">Log out</span></a></li>
     </ul>

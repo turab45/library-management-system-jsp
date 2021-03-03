@@ -29,7 +29,7 @@
                                         <h4 class="text-dark mb-4">Welcome Back!</h4>
                                         <h2 class="text-dark mb-4">Login</h2>
                                     </div>
-                                    <form class="user" method="Post" action="Handle">
+                                    <form class="user" method="Post" action="Handle?action='login'">
                                         <div class="form-group"><input required class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" style="border-color: rgb(31,40,81);"></div>
                                         <div class="form-group"><input required class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" style="border-color: rgb(31,40,81);"></div>
                                         <div class="form-group">
