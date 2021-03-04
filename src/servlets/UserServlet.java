@@ -54,7 +54,7 @@ public class UserServlet extends HttpServlet {
 			
 			Role role2 = roleDaoImpl.getRoleById(roleDaoImpl.getRoleIdByName(role));
 			user.setRole(role2);
-			user.setCreatedBy(u.getRole().getId());
+			user.setCreatedBy(u.getRole());
 			break;
 
 		default:

@@ -32,15 +32,17 @@ public class HandleServlet extends HttpServlet {
 	}
 
 	/**
+	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String useremail = request.getParameter("email");
 		String pass = request.getParameter("password");
+		System.out.println("Action : " + request.getParameter("action"));
 		String action = request.getParameter("action");
-
+		
+		
 		switch (action) {
 		case "login":
 			Integer id = userDaoImpl.getUserIdByEmailandPass(useremail, pass);
@@ -52,19 +54,16 @@ public class HandleServlet extends HttpServlet {
 				session.setAttribute("user", user);
 
 				response.sendRedirect("dashboard.jsp");
-			} else {
+			}else {
 				response.getWriter().print("Email & Password incorrect");
 			}
-
 			break;
+
 		case "logout":
-			
-				HttpSession session = request.getSession();
-				session.invalidate();
-				response.sendRedirect("login.jsp");
-			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			response.sendRedirect("login.jsp");
 			break;
-
 		}
 
 	}

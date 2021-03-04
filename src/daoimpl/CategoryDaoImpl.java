@@ -85,7 +85,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		ResultSet rs = null;
         try {
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM category WHERE name=? and status > 0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM category WHERE category=? and status > 0");
             pstmt.setString(1, name);
                         
             rs = pstmt.executeQuery();

@@ -27,13 +27,13 @@ public class BookDaoImpl implements BookDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO book(title,author,no-of-copies,category,create_date,created_by,status) VALUES(?,?,?,?,?,?,1)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO book(`title`,`author`,`no-of-copies`,category,`create_date`,created_by,status) VALUES(?,?,?,?,?,?,1)");
             pstmt.setString(1, book.getTitle());
             pstmt.setString(2, book.getAuthor());
             pstmt.setInt(3, book.getNoOfCopies());
-            pstmt.setInt(3, book.getCategory().getId());
-            pstmt.setDate(4, createdDate);
-            pstmt.setInt(5, book.getCreatedBy().getId());
+            pstmt.setInt(4, book.getCategory().getId());
+            pstmt.setDate(5, createdDate);
+            pstmt.setInt(6, book.getCreatedBy().getId());
            
                         
             row = pstmt.executeUpdate();

@@ -6,6 +6,15 @@
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="models.*"%>
+    
+    
+    <%
+ session = request.getSession();
+ User user = (User) session.getAttribute("user");
+ 
+ if(user != null){
+ %>
 <!DOCTYPE html>
 <html>
 
@@ -65,3 +74,6 @@
 </body>
 
 </html>
+<%}else{
+	response.sendRedirect("login.jsp");
+}%>
