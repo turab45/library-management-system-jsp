@@ -1,11 +1,25 @@
+<%@page import="daoimpl.RoleDaoImpl"%>
+<%@page import="dao.RoleDao"%>
+<%@page import="daoimpl.UserDaoImpl"%>
+<%@page import="dao.UserDAO"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="models.*"%>
     
     
     <%
+    
+    UserDAO userDaoImpl = new UserDaoImpl();
+    RoleDao roleDaoImpl = new RoleDaoImpl();
+    
+    List<User> allUsers = userDaoImpl.getAllUser();
+    
+    
  session = request.getSession();
  User user = (User) session.getAttribute("user");
+ 
+ String action = "delete";
  
  if(user != null){
  %>
@@ -43,19 +57,29 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
+                    <%for (User u: allUsers){ 
+                    Role createdBy = roleDaoImpl.getRoleById(u.getRole().getId());
+                    Role updatedBy = roleDaoImpl.getRoleById(u.getRole().getId());
+                    %>
+                    
                         <tr>
-                            <td style="color: rgb(14,16,18);">Cell 1</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="width: 36px;"><a href="#" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
-                            <td style="width: 36px;height: 49px;"><a href="#" style="/*text-decoration: none;*//*background-color: red;*//*color: rgb(221,16,16);*//*border: 1px solid;*//*border-radius: 5px;*//*width: 12px;*//*height: 20px;*/color: red;font-weight: bold;"></a><a href="#" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getId() %></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getName() %></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getEmail() %></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getPassword() %></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getCreateDate() %></td>
+                            <td style="color: rgb(14,16,18);"><%=createdBy.getRole() %></td>
+                            <td style="color: rgb(14,16,18);"><%=u.getUpdateDate() %></td>
+                            <td style="color: rgb(14,16,18);"><%=updatedBy.getRole() %></td>
+                            <td style="width: 36px;"><a href="edit-user.jsp?id=<%=u.getId()%>" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
+                            <td style="width: 36px;height: 49px;"><a href="#" style="/*text-decoration: none;*//*background-color: red;*//*color: rgb(221,16,16);*//*border: 1px solid;*//*border-radius: 5px;*//*width: 12px;*//*height: 20px;*/color: red;font-weight: bold;"></a><a href="User?id=<%=u.getId()%>&&action=<%=action %>" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
                         </tr>
+                        
                         <tr></tr>
+                        
+                     <%} %>
+                        
                     </tbody>
                 </table>
             </div>

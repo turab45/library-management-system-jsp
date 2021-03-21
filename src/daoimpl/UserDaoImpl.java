@@ -20,13 +20,15 @@ public class UserDaoImpl implements UserDAO{
 	public Integer addUser(User user) {
 		Integer row = null;
         try {
+        	java.util.Date date = new java.util.Date();
             
-            java.sql.Date createdDate = new Date(user.getCreateDate().getTime());
+            java.sql.Date createdDate = new Date(date.getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user(name,email,password,role,create_date,created_by,status) VALUES(?,?,?,?,?,?,1)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO `user`(`name`,email,`password`,role,create_date,created_by,`status`) VALUES(?,?,?,?,?,?,1)");
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
+            
             pstmt.setInt(4, user.getRole().getId());
             pstmt.setDate(5, createdDate);
             pstmt.setInt(6, user.getCreatedBy().getId());
@@ -46,9 +48,11 @@ public class UserDaoImpl implements UserDAO{
 		Integer row = null;
         try {
             
-            java.sql.Date updatedDate = new Date(user.getUpdateDate().getTime());
+        	java.util.Date date = new java.util.Date();
+        	
+            java.sql.Date updatedDate = new Date(date.getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE user SET name=?,email=?,password=?,update_date=?,updated_by where id=?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE `user` SET name=?,`email`=?,`password`=?,`role`=?,`update_date`=?,`updated_by`=? where id=?");
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());

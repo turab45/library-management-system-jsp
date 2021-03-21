@@ -1,11 +1,24 @@
+<%@page import="daoimpl.CategoryDaoImpl"%>
+<%@page import="dao.CategoryDao"%>
+<%@page import="java.util.List"%>
+<%@page import="daoimpl.BookDaoImpl"%>
+<%@page import="dao.BookDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="models.*"%>
     
     
     <%
+    
+    BookDao bookDaoImpl = new BookDaoImpl();
+    CategoryDao categoryDaoImpl = new CategoryDaoImpl();
+    
+    List<Book> allBooks = bookDaoImpl.getAllBook();
+    
  session = request.getSession();
  User user = (User) session.getAttribute("user");
+ 
+ String action = "delete";
  
  if(user != null){
  %>
@@ -27,6 +40,7 @@
                 <h1 class="text-center" style="color: rgb(31,40,81);font-weight: bold;">Books</h1>
                 <p class="text-center"> </p>
             </div>
+            <% if (allBooks.size() > 0) {%>
             <div class="table-responsive shadow" style="background-color: #fff;">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -40,19 +54,29 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <%for(Book book: allBooks){
+                    	Category c = categoryDaoImpl.getCategoryById(book.getCategory().getId());
+                    	%>
+                    
                         <tr>
-                            <td style="color: rgb(14,16,18);">Cell 1</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="width: 36px;"><a href="#" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
-                            <td style="width: 36px;height: 49px;"><a href="#" style="/*text-decoration: none;*//*background-color: red;*//*color: rgb(221,16,16);*//*border: 1px solid;*//*border-radius: 5px;*//*width: 12px;*//*height: 20px;*/color: red;font-weight: bold;"></a><a href="#" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
+                            <td style="color: rgb(14,16,18);"><%=book.getId() %></td>
+                            <td style="color: rgb(14,16,18);"><%=book.getTitle() %></td>
+                            <td style="color: rgb(14,16,18);"><%=book.getAuthor() %></td>
+                            <td style="color: rgb(14,16,18);"><%=c.getCategory() %></td>
+                            <td style="color: rgb(14,16,18);"><%=book.getNoOfCopies()%></td>
+                             <% // Book?id=<%=book.getId() && action=<%="update" %>
+                            <td style="width: 36px;"><a href="edit-book.jsp?id=<%=book.getId()%>" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
+                            <td style="width: 36px;height: 49px;"><a href="Book?id=<%=book.getId()%>&&action=<%=action %>" style="color: red;font-weight: bold;"></a><a href="Book?id=<%=book.getId()%>&&action=<%=action %>" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
                         </tr>
                         <tr></tr>
+                        <%} %>
                     </tbody>
                 </table>
             </div>
+            <%} else{ %>
+            
+            	<center><h1>No Books</h1></center>
+            <%} %>
         </div>
     </div>
      <%@ include file="scripts.jsp" %> 

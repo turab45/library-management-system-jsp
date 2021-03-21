@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.RoleDao;
+import dao.UserDAO;
 import daoimpl.RoleDaoImpl;
+import daoimpl.UserDaoImpl;
 import models.Role;
 import models.User;
 
@@ -20,6 +22,7 @@ import models.User;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RoleDao roleDaoImpl = new RoleDaoImpl();
+	UserDAO userDAOImpl = new UserDaoImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,6 +48,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println(name+", "+email+", "+pass+", "+role);
 		String action = request.getParameter("action");
 		
+		
 		switch (action) {
 		case "add":
 			User user = new User();
@@ -52,11 +56,53 @@ public class UserServlet extends HttpServlet {
 			user.setEmail(email);
 			user.setPassword(pass);
 			
+			
 			Role role2 = roleDaoImpl.getRoleById(roleDaoImpl.getRoleIdByName(role));
+			System.out.println("Role Details: "+role2);
+			Role createdBy = roleDaoImpl.getRoleById(u.getRole().getId());
 			user.setRole(role2);
-			user.setCreatedBy(u.getRole());
+			user.setCreatedBy(createdBy);
+			
+			Integer result = userDAOImpl.addUser(user);
+			
+			if (result > 0) {
+				response.sendRedirect("view-user.jsp");
+			}
 			break;
 
+		case "update":
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			
+			user = userDAOImpl.getUserById(id);
+			
+			user.setName(name);
+			user.setEmail(email);
+			user.setPassword(pass);
+			
+			
+			role2 = roleDaoImpl.getRoleById(roleDaoImpl.getRoleIdByName(role));
+	
+			Role updatedBy = roleDaoImpl.getRoleById(u.getRole().getId());
+			user.setRole(role2);
+			user.setUpdatedBy(updatedBy);
+			
+			result = userDAOImpl.updateUser(user);
+			
+			if (result > 0) {
+				response.sendRedirect("view-user.jsp");
+			}
+			break;
+		case "delete":
+			id = Integer.parseInt(request.getParameter("id"));
+			
+			
+			result = userDAOImpl.deleteUser(id);
+			
+			if (result > 0) {
+				response.sendRedirect("view-user.jsp");
+			}
+			break;
+			
 		default:
 			break;
 		}

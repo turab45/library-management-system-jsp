@@ -52,14 +52,15 @@ public class BookDaoImpl implements BookDao{
             
             java.sql.Date updatedDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE book SET title=?,author=?,no-of-copies=?,category=?,update_date=?,updated_by=? WHERE book-id=?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE book SET title=?,author=?,`no-of-copies`=?,category=?,`update_date`=?,updated_by=? WHERE `book-id`=?");
             pstmt.setString(1, book.getTitle());
             pstmt.setString(2, book.getAuthor());
             pstmt.setInt(3, book.getNoOfCopies());
-            pstmt.setInt(3, book.getCategory().getId());
-            pstmt.setDate(4, updatedDate);
-            pstmt.setInt(5, book.getUpdatedBy().getId());
-            pstmt.setInt(6, book.getId());
+            pstmt.setInt(4, book.getCategory().getId());
+            pstmt.setDate(5, updatedDate);
+            System.out.print("Updated By id: "+book.getUpdatedBy().getId());
+            pstmt.setInt(6, book.getUpdatedBy().getId());
+            pstmt.setInt(7, book.getId());
            
                         
             row = pstmt.executeUpdate();
@@ -78,7 +79,7 @@ public class BookDaoImpl implements BookDao{
             
             java.sql.Date updatedDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE book SET status=0 WHERE book-id=?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE book SET status=0 WHERE `book-id`=?");
             
             pstmt.setInt(1, id);
            
@@ -121,7 +122,7 @@ public class BookDaoImpl implements BookDao{
 		ResultSet rs = null;
         try {
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM book WHERE book-id=? and status > 0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM book WHERE `book-id`=? and status > 0");
             
             pstmt.setInt(1, id);
            

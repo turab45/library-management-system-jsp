@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import dao.BookDao;
 import dao.CategoryDao;
+import dao.RoleDao;
 import daoimpl.BookDaoImpl;
 import daoimpl.CategoryDaoImpl;
+import daoimpl.RoleDaoImpl;
 import models.Book;
 import models.Category;
 import models.Role;
@@ -25,6 +27,7 @@ public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CategoryDao categoryDaoImpl = new CategoryDaoImpl();
 	BookDao bookDaoImpl = new BookDaoImpl();
+	RoleDao roleDaoImpl = new RoleDaoImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,9 +51,12 @@ public class BookServlet extends HttpServlet {
 		
 		Category category = categoryDaoImpl.getCategoryById(categoryDaoImpl.getIdByName(categoryName));
 		
-		Integer noOfCopies = Integer.parseInt(request.getParameter("no-of-copies"));
+
 		
 		String action = request.getParameter("action");
+		
+		System.out.print("Action: "+action);
+		System.out.print("No of copies: "+request.getParameter("no-of-copies"));
 		
 		Book book = null;
 		Integer id = null;
@@ -58,6 +64,7 @@ public class BookServlet extends HttpServlet {
 		switch (action) {
 		
 		case "add":
+			Integer noOfCopies = Integer.parseInt(request.getParameter("no-of-copies"));
 			book = new Book();
 			book.setTitle(title);
 			book.setAuthor(author);
@@ -72,13 +79,26 @@ public class BookServlet extends HttpServlet {
 			break;
 
 		case "update":
+			
+			noOfCopies = Integer.parseInt(request.getParameter("no-of-copies"));
 			id = Integer.parseInt(request.getParameter("id"));
 			book = bookDaoImpl.getBookById(id);
 			book.setTitle(title);
 			book.setAuthor(author);
 			book.setCategory(category);
 			book.setNoOfCopies(noOfCopies);
-			book.setCreatedBy(u.getRole());
+			
+			Role role = new Role();
+			role.setId(u.getRole().getId());
+			
+			book.setUpdatedBy(role);
+			
+			result = bookDaoImpl.updateBook(book);
+			System.out.print("Result : "+result);
+			if (result > 0) {
+				response.sendRedirect("view-book.jsp");
+			}
+			
 			break;
 		case "delete":
 			id = Integer.parseInt(request.getParameter("id"));
