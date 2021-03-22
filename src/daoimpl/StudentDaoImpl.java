@@ -23,7 +23,7 @@ public class StudentDaoImpl implements StudentDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO student(name,dateofbirth,contact,email,create_date,created_by,status) VALUES(?,?,?,?,?,?,1)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO student(`name`,dateofbirth,contact,email,create_date,created_by,`status`) VALUES(?,?,?,?,?,?,1)");
             pstmt.setString(1, student.getName());
             pstmt.setDate(2, new Date(student.getDateOfBirth().getTime()));
             pstmt.setString(3, student.getContact());
@@ -49,7 +49,7 @@ public class StudentDaoImpl implements StudentDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET name=?,dateofbirth=?,contact=?,email=?,update_date=?,updated_by=? WHERE id=?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET `name`=?,dateofbirth=?,contact=?,email=?,update_date=?,updated_by=? WHERE id=?");
             pstmt.setString(1, student.getName());
             pstmt.setDate(2, new Date(student.getDateOfBirth().getTime()));
             pstmt.setString(3, student.getContact());
@@ -73,7 +73,7 @@ public class StudentDaoImpl implements StudentDao{
 		Integer row = null;
         try {
         	
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET status=0 WHERE id=?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET `status`=0 WHERE id=?");
             pstmt.setInt(1, id);
            
                         
@@ -92,7 +92,7 @@ public class StudentDaoImpl implements StudentDao{
 		ResultSet rs = null;
         try {
         	
-            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM student WHERE name=? and status=0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM student WHERE `name`=? and `status`=1");
             pstmt.setInt(1, id);
            
                         
@@ -115,7 +115,7 @@ public class StudentDaoImpl implements StudentDao{
 		ResultSet rs = null;
         try {
         	
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM student WHERE id=? and status=0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM student WHERE id=? and `status`=1");
             pstmt.setInt(1, id);
            
                         
@@ -153,7 +153,7 @@ public class StudentDaoImpl implements StudentDao{
 		ResultSet rs = null;
         try {
         	
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM student WHERE status=0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM student WHERE `status`=1");
            
                         
             rs = pstmt.executeQuery();

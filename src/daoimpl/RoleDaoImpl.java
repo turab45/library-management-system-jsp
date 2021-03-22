@@ -95,7 +95,7 @@ public class RoleDaoImpl implements RoleDao{
 		ResultSet rs = null;
 		try {
 			
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM role WHERE `role_id`=? and status>0");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM role WHERE `role_id`=? and `status`=1");
 			pstmt.setInt(1, id);
             
             rs = pstmt.executeQuery();
