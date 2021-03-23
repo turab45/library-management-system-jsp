@@ -160,6 +160,9 @@ public class StudentDaoImpl implements StudentDao{
             
             while (rs.next()) {
 				Student student = new Student();
+				Role r1 = new Role();
+				Role r2 = new Role();
+				
 				student.setId(rs.getInt("id"));
 				student.setName(rs.getString("name"));
 				student.setDateOfBirth(rs.getDate("dateofbirth"));
@@ -168,9 +171,14 @@ public class StudentDaoImpl implements StudentDao{
 				student.setCreateDate(rs.getDate("create_date"));
 				student.setUpdateDate(rs.getDate("update_date"));
 				
-				Role r1 = new Role();
-				r1.setId(rs.getInt("created_by"));
-				Role r2 = new Role();
+				
+				
+				Integer r1Id = rs.getInt("created_by");
+				
+				System.out.println("Created By id from database: "+r1Id);
+				
+				r1.setId(r1Id);
+				
 				r1.setId(rs.getInt("updated_by"));
 				
 				student.setCreatedBy(r1);

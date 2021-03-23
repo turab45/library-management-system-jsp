@@ -91,34 +91,39 @@ public class RoleDaoImpl implements RoleDao{
 
 	@Override
 	public Role getRoleById(Integer id) {
+		
 		Role role = null;
 		ResultSet rs = null;
-		try {
-			
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM role WHERE `role_id`=? and `status`=1");
-			pstmt.setInt(1, id);
-            
-            rs = pstmt.executeQuery();
-			
-            if (rs.next()) {
-				role = new Role();
-				role.setId(rs.getInt("role_id"));
-            	role.setRole(rs.getString("role"));
-            	role.setCreateDate(rs.getDate("create_date"));
-            	role.setUpdateDate(rs.getDate("update_date"));
-            	
-            	Role role1 = new Role();
-            	role1.setId(rs.getInt("created_by"));
-            	Role role2 = new Role();
-            	role2.setId(rs.getInt("updated_by"));
-            	
-            	role.setCreatedBy(role1);
-            	role.setUpdatedBy(role2);
+		
+		if (id != null) {
+			try {
+				
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM role WHERE `role_id`=? and `status`=1");
+				pstmt.setInt(1, id);
+	            
+	            rs = pstmt.executeQuery();
+				
+	            if (rs.next()) {
+					role = new Role();
+					role.setId(rs.getInt("role_id"));
+	            	role.setRole(rs.getString("role"));
+	            	role.setCreateDate(rs.getDate("create_date"));
+	            	role.setUpdateDate(rs.getDate("update_date"));
+	            	
+	            	Role role1 = new Role();
+	            	role1.setId(rs.getInt("created_by"));
+	            	Role role2 = new Role();
+	            	role2.setId(rs.getInt("updated_by"));
+	            	
+	            	role.setCreatedBy(role1);
+	            	role.setUpdatedBy(role2);
+				}
+	            
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-            
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		
 		return role;
 	}
 

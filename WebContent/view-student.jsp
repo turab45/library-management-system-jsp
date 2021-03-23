@@ -17,7 +17,7 @@
  
  List<Student> allStudent = studetDaoImpl.getAllStudent();
  
- System.out.print("Student size is: "+allStudent.size());
+System.out.println("Student size: "+allStudent.size());
  
  if(user != null){
  %>
@@ -62,28 +62,26 @@
                     <% for (Student s: allStudent){ %>
                     
                     <% 
+                    
+                    	System.out.println("Created By ID: "+s.getCreatedBy().getId());
                     	Role createdBy = roleDaoImpl.getRoleById(s.getCreatedBy().getId());
-                    	
-                    	
-                    	Role updatedBy = roleDaoImpl.getRoleById(s.getUpdatedBy().getId()); %>
+                    Role updatedBy = null;
+                    	if(s.getUpdatedBy() != null){
+                    	updatedBy = roleDaoImpl.getRoleById(s.getUpdatedBy().getId());} %>
                         <tr>
                             <td style="color: rgb(14,16,18);"><%=s.getId() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getName() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getDateOfBirth() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getContact() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getEmail() %></td>
-                            <td style="color: rgb(14,16,18);"><%=s.getCreateDate() %></td>
-                            <td style="color: rgb(14,16,18);"><%=createdBy.getRole() %></td>
-                            <%if(s.getUpdateDate() != null){ %>
-                            <td style="color: rgb(14,16,18);"><%=s.getUpdateDate() %></td>
-                            <%}else{ %>
-                            <td style="color: rgb(14,16,18);">"--"</td>
-                            <%} %>
-                            <%if(updatedBy.getRole() != null){ %>
-                            <td style="color: rgb(14,16,18);"><%=updatedBy.getRole() %></td>
-                            <%}else{ %>
-                             <td style="color: rgb(14,16,18);">"--"</td>
-                             <%} %>
+                             <td style="color: rgb(14,16,18);"><%=s.getCreateDate().toString() %></td>  
+                            <td style="color: rgb(14,16,18);">--</td> 
+                            
+                            <td style="color: rgb(14,16,18);">--</td>
+                          
+                            <td style="color: rgb(14,16,18);">--</td>
+                            
+                             
                             
                             
                             <td style="width: 36px;"><a href="#" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
