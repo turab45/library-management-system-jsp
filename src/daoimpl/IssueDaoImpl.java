@@ -29,12 +29,13 @@ public class IssueDaoImpl implements IssueDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO issue(book-id,student-id,issued-by,create_date,created_by,status) VALUES(?,?,?,?,?,1)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO issue(`book-id`,`student-id`,`issue-date`,`issued-by`,create_date,created_by,`status`) VALUES(?,?,?,?,?,?,1)");
             pstmt.setInt(1, issue.getBook().getId());
             pstmt.setInt(2, issue.getStudent().getId());
-            pstmt.setInt(3, issue.getIssuedBy().getId());
-            pstmt.setDate(4, createdDate);
-            pstmt.setInt(5, issue.getCreatedBy().getId());
+            pstmt.setDate(3, createdDate);
+            pstmt.setInt(4, issue.getIssuedBy().getId());
+            pstmt.setDate(5, createdDate);
+            pstmt.setInt(6, issue.getCreatedBy().getId());
            
                         
             row = pstmt.executeUpdate();

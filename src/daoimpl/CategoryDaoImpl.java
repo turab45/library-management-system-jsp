@@ -49,7 +49,7 @@ public class CategoryDaoImpl implements CategoryDao{
             pstmt.setString(1, category.getCategory());
             pstmt.setDate(2, updateDate);
             pstmt.setInt(3, category.getUpdatedBy().getId());
-            pstmt.setInt(3, category.getId());
+            pstmt.setInt(4, category.getId());
                         
             row = pstmt.executeUpdate();
             
@@ -105,30 +105,38 @@ public class CategoryDaoImpl implements CategoryDao{
 	public Category getCategoryById(Integer id) {
 		Category category = null;
 		ResultSet rs = null;
-        try {
-            
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM category WHERE id=? and status > 0");
-            pstmt.setInt(1, id);
-                        
-            rs = pstmt.executeQuery();
-            
-            if (rs.next()) {
-				category = new Category();
-				category.setId(rs.getInt("id"));
-				category.setCategory(rs.getString("category"));
-				category.setCreateDate(rs.getDate("create_date"));
-				category.setUpdateDate(rs.getDate("update_date"));
-				
-				Role r1 = new Role();
-				r1.setId(rs.getInt("created_by"));
-				Role r2 = new Role();
-				r2.setId(rs.getInt("updated_by"));
-			}
-            
-        } catch (Exception ex) {
-            System.out.println("ERROR: "+ex.getMessage());
-            ex.printStackTrace();
-        }
+        if (id != null) {
+        	try {
+                
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM category WHERE id=? and status > 0");
+                pstmt.setInt(1, id);
+                            
+                rs = pstmt.executeQuery();
+                
+                if (rs.next()) {
+    				category = new Category();
+    				category.setId(rs.getInt("id"));
+    				category.setCategory(rs.getString("category"));
+    				category.setCreateDate(rs.getDate("create_date"));
+    				category.setUpdateDate(rs.getDate("update_date"));
+    				
+    				Role r1 = new Role();
+    				r1.setId(rs.getInt("created_by"));
+    				Role r2 = new Role();
+    				r2.setId(rs.getInt("updated_by"));
+    				
+    				category.setCreatedBy(r1);
+    				category.setUpdatedBy(r2);
+    				
+    				System.out.println("Created By ID From DB: "+rs.getInt("created_by"));
+    				System.out.println("Created By ID From DB: "+rs.getInt("updated_by"));
+    			}
+                
+            } catch (Exception ex) {
+                System.out.println("ERROR: "+ex.getMessage());
+                ex.printStackTrace();
+            }
+		}
         return category;
 	}
 
@@ -138,7 +146,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		ResultSet rs = null;
         try {
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM category WHERE status > 0");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM category WHERE status = 1");
                         
             rs = pstmt.executeQuery();
             
@@ -153,6 +161,9 @@ public class CategoryDaoImpl implements CategoryDao{
 				r1.setId(rs.getInt("created_by"));
 				Role r2 = new Role();
 				r2.setId(rs.getInt("updated_by"));
+				
+				category.setCreatedBy(r1);
+				category.setUpdatedBy(r2);
 				
 				allCategory.add(category);
 			}

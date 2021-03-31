@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
 
+import dao.RoleDao;
 import dao.UserDAO;
+import daoimpl.RoleDaoImpl;
 import daoimpl.UserDaoImpl;
+import models.Role;
 import models.User;
 
 /**
@@ -22,6 +25,7 @@ public class HandleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	UserDAO userDaoImpl = new UserDaoImpl();
+	RoleDao roleDaoImpl = new RoleDaoImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,7 +53,8 @@ public class HandleServlet extends HttpServlet {
 
 			if (id != null) {
 				User user = userDaoImpl.getUserById(id);
-
+				Role role = roleDaoImpl.getRoleById(user.getRole().getId());
+				user.setRole(role);
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
 
@@ -63,6 +68,27 @@ public class HandleServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			response.sendRedirect("login.jsp");
+			break;
+			
+		case "update":
+			session = request.getSession();
+			User u = (User)session.getAttribute("user");
+			
+			String firstName = request.getParameter("firstname");
+			String lastName = request.getParameter("lastname");
+			
+			
+			u.setName(firstName + " "+ lastName);
+			u.setEmail(useremail);
+			u.setPassword(pass);
+			u.setUpdatedBy(u.getRole());
+			
+			Integer result = userDaoImpl.updateUser(u);
+			
+			if (result > 0) {
+				response.sendRedirect("my-profile.jsp");
+			}
+			
 			break;
 		}
 

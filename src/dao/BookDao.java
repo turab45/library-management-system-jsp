@@ -11,5 +11,6 @@ public interface BookDao {
 	public Integer getIdByName(String name);
 	public Book getBookById(Integer id);
 	public List<Book> getAllBook();
+	
 
 }

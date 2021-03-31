@@ -1,3 +1,8 @@
+<%@page import="daoimpl.RoleDaoImpl"%>
+<%@page import="dao.RoleDao"%>
+<%@page import="java.util.List"%>
+<%@page import="daoimpl.CategoryDaoImpl"%>
+<%@page import="dao.CategoryDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="models.*"%>
@@ -6,6 +11,11 @@
     <%
  session = request.getSession();
  User user = (User) session.getAttribute("user");
+ 
+ CategoryDao categoryDaoImpl = new CategoryDaoImpl();
+ RoleDao roleDaoImpl = new RoleDaoImpl();
+ 
+ List<Category> allCategory = categoryDaoImpl.getAllCategory();
  
  if(user != null){
  %>
@@ -41,17 +51,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
+                    <%for (Category c : allCategory){ 
+                    	
+                    	
+                    	Role createdBy = roleDaoImpl.getRoleById(c.getCreatedBy().getId());
+                    	Role updatedBy = roleDaoImpl.getRoleById(c.getUpdatedBy().getId());
+                    %>
                         <tr>
-                            <td style="color: rgb(14,16,18);">Cell 1</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="color: rgb(14,16,18);">Cell 2</td>
-                            <td style="width: 36px;"><a href="#" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
-                            <td style="width: 36px;height: 49px;"><a href="#" style="/*text-decoration: none;*//*background-color: red;*//*color: rgb(221,16,16);*//*border: 1px solid;*//*border-radius: 5px;*//*width: 12px;*//*height: 20px;*/color: red;font-weight: bold;"></a><a href="#" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
+                            <td style="color: rgb(14,16,18);"><%=c.getId() %></td>
+                            <td style="color: rgb(14,16,18);"><%=c.getCategory() %></td>
+                            <td style="color: rgb(14,16,18);"><%=c.getCreateDate() %></td>
+                            <td style="color: rgb(14,16,18);"><%=createdBy.getRole() %></td>
+                            <td style="color: rgb(14,16,18);"><%=c.getUpdateDate() %></td>
+                            <td style="color: rgb(14,16,18);">--</td>
+                            <td style="width: 36px;"><a href="edit-category.jsp?id=<%=c.getId() %>" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
+                            <td style="width: 36px;height: 49px;"><a href="Category?id=<%=c.getId() %>&&action=<%="delete" %>" style="/*text-decoration: none;*//*background-color: red;*//*color: rgb(221,16,16);*//*border: 1px solid;*//*border-radius: 5px;*//*width: 12px;*//*height: 20px;*/color: red;font-weight: bold;"></a><a href="Category?id=<%=c.getId() %>&&action=<%="delete" %>" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
                         </tr>
                         <tr></tr>
+                     <%} %>
                     </tbody>
                 </table>
             </div>

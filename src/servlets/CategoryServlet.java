@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CategoryDao;
+import dao.RoleDao;
 import daoimpl.CategoryDaoImpl;
 import models.Category;
 import models.User;
@@ -21,6 +22,7 @@ public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CategoryDao categoryDaoImpl = new CategoryDaoImpl();
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,13 +48,42 @@ public class CategoryServlet extends HttpServlet {
 		
 		switch (action) {
 		case "add":
-			category = request.getParameter("caategory");
+			category = request.getParameter("category");
 			
 			Category c = new Category();
 			c.setCategory(category);
 			c.setCreatedBy(u.getRole());
 			
 			result = categoryDaoImpl.addCategory(c);
+			
+			if (result > 0) {
+				response.sendRedirect("view-category.jsp");
+			}
+			
+			break;
+			
+		case "update":
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			category = request.getParameter("category");
+			
+			c = categoryDaoImpl.getCategoryById(id);
+			
+			c.setCategory(category);
+			c.setUpdatedBy(u.getRole());
+			
+			result = categoryDaoImpl.updateCategory(c);
+			
+			if (result > 0) {
+				response.sendRedirect("view-category.jsp");
+			}
+			
+			break;
+			
+		case "delete":
+			id = Integer.parseInt(request.getParameter("id"));
+			
+			
+			result = categoryDaoImpl.deleteCategory(id);
 			
 			if (result > 0) {
 				response.sendRedirect("view-category.jsp");

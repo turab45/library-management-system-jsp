@@ -10,13 +10,19 @@ import javax.servlet.http.HttpSession;
 
 import dao.BookDao;
 import dao.CategoryDao;
+import dao.IssueDao;
 import dao.RoleDao;
+import dao.StudentDao;
 import daoimpl.BookDaoImpl;
 import daoimpl.CategoryDaoImpl;
+import daoimpl.IssueDaoImpl;
 import daoimpl.RoleDaoImpl;
+import daoimpl.StudentDaoImpl;
 import models.Book;
 import models.Category;
+import models.Issue;
 import models.Role;
+import models.Student;
 import models.User;
 
 /**
@@ -28,6 +34,8 @@ public class BookServlet extends HttpServlet {
 	CategoryDao categoryDaoImpl = new CategoryDaoImpl();
 	BookDao bookDaoImpl = new BookDaoImpl();
 	RoleDao roleDaoImpl = new RoleDaoImpl();
+	StudentDao studentDaoImpl = new StudentDaoImpl();
+	IssueDao issueDaoImpl = new IssueDaoImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -103,6 +111,30 @@ public class BookServlet extends HttpServlet {
 		case "delete":
 			id = Integer.parseInt(request.getParameter("id"));
 			result = bookDaoImpl.deleteBook(id);
+			
+			if (result > 0) {
+				response.sendRedirect("view-book.jsp");
+			}else {
+				response.getWriter().print("Error in deleting book!");
+			}
+			break;
+			
+		case "issue":
+			Integer bookId = Integer.parseInt(request.getParameter("book-id"));
+			Integer studentId = Integer.parseInt(request.getParameter("student-id"));
+			
+			Book book2 = bookDaoImpl.getBookById(bookId);
+			Student student = studentDaoImpl.getStudentById(studentId);
+			
+			Role createdBy = roleDaoImpl.getRoleById(u.getRole().getId());
+			
+			Issue issue = new Issue();
+			issue.setBook(book2);
+			issue.setStudent(student);
+			issue.setCreatedBy(createdBy);
+			issue.setIssuedBy(u);
+			
+			result = issueDaoImpl.addIssue(issue);
 			
 			if (result > 0) {
 				response.sendRedirect("view-book.jsp");
