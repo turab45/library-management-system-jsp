@@ -201,4 +201,24 @@ public class IssueDaoImpl implements IssueDao{
         return id;
 	}
 
+	@Override
+	public Integer returnBook(Issue issue) {
+		Integer row = null;
+        try {
+            
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE issue SET status=0 WHERE id=?");
+            pstmt.setInt(1, issue.getId());
+           
+                        
+            row = pstmt.executeUpdate();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR: "+ex.getMessage());
+            ex.printStackTrace();
+        }
+        return row;
+	}
+	
+
+
 }

@@ -1,3 +1,7 @@
+<%@page import="daoimpl.StudentDaoImpl"%>
+<%@page import="dao.StudentDao"%>
+<%@page import="daoimpl.IssueDaoImpl"%>
+<%@page import="dao.IssueDao"%>
 <%@page import="java.util.List"%>
 <%@page import="daoimpl.BookDaoImpl"%>
 <%@page import="dao.BookDao"%>
@@ -27,8 +31,12 @@
 <% 
 	UserDAO usDaoImpl = new UserDaoImpl();
 	BookDao bookDaoImpl = new BookDaoImpl();
+	IssueDao issueDaoImpl = new IssueDaoImpl();
+	StudentDao studentDaoImpl = new StudentDaoImpl();
 	
 	List<Book> allBooks = bookDaoImpl.getAllBook();
+	List<Issue> allIssuedBooks = issueDaoImpl.getAllIssue();
+	List<Student> allStudent = studentDaoImpl.getAllStudent();
 
 %>
 
@@ -46,7 +54,7 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item" style="background-color: #fff;">
                     <div class="box" style="background-color: rgb(31,40,81);/*border-radius: 1px solid;*/border-radius: 30px;"><i class="fas fa-users icon" style="color: #fff;"></i>
                         <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-student.jsp">Students</a></h3>
-                        <h3 class="name" style="color: #fff;">68</h3>
+                        <h3 class="name" style="color: #fff;"><%=allStudent.size() %></h3>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
@@ -58,8 +66,8 @@
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box" style="background-color: rgb(31,40,81);"><i class="fa fa-list-alt icon" style="color: #fff;"></i>
-                         <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-book.jsp">Issued Books</a></h3>
-                        <h3 class="name" style="color: #fff;">34</h3>
+                         <h3><a class="name" style="color: #fff; text-decoration: none;" href="view-issued-book.jsp">Issued Books</a></h3>
+                        <h3 class="name" style="color: #fff;"><%=allIssuedBooks.size() %></h3>
                     </div>
                 </div>
             </div>

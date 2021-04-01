@@ -11,5 +11,6 @@ public interface IssueDao {
 	public Integer getIdByBookandStudent(Integer bookId, Integer studentID);
 	public Issue getIssueById(Integer id);
 	public List<Issue> getAllIssue();
+	public Integer returnBook(Issue issue);
 
 }
