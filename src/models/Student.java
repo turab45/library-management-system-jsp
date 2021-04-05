@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Student {
 	private Integer id;
+	private String rollNo;
 	private String name;
 	private Date dateOfBirth;
 	private String contact;
@@ -13,6 +14,14 @@ public class Student {
 	private Date updateDate;
 	private Role updatedBy;
 	private int status;
+	
+	
+	public String getRollNo() {
+		return rollNo;
+	}
+	public void setRollNo(String rollNo) {
+		this.rollNo = rollNo;
+	}
 	public Integer getId() {
 		return id;
 	}

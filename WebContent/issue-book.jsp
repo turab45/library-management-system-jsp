@@ -44,55 +44,32 @@
                             <div class="col-md-8">
                                 <h1 class="text-center" style="color: rgb(31,40,81);">Issue Book</h1>
                                 <hr style="background-color: rgb(31,40,81);">
-                                <div class="form-group"><label style="color: rgb(31,40,81);font-size: 16px;font-weight: bold;">Book Id</label><input name="book-id" class="form-control" type="number" style="border-color: rgb(31,40,81);"></div>
-                                <div class="form-group"><label style="color: rgb(31,40,81);font-size: 16px;font-weight: bold;">Student Id</label><input name="student-id" class="form-control" type="number" style="border-color: rgb(31,40,81);"></div>
+                               
+                                <div class="form-group"><label style="color: rgb(31,40,81);font-size: 16px;font-weight: bold;">Student Roll No</label><input name="student-roll-no" class="form-control" type="text" style="border-color: rgb(31,40,81);"></div>
                                 <hr style="background-color: #fff;">
                                 <div class="form-row">
                                     <div class="col-md-12 content-right"><button class="btn btn-primary form-btn" type="submit" style="background-color: rgb(31,40,81);border-color: rgb(31,40,81);">ISSUE</button><button class="btn btn-danger form-btn" type="reset" style="background-color: rgb(31,40,81);border-color: rgb(31,40,81);">CANCEL </button></div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                     <div style="margin-top: 20px"></div>
                     
                 </div>
             </div>
         </div>
         <div style="margin: 20px">
-        <center><h1>Books</h1></center>
+        <h1 style="margin-bottom: 10px">Select Books</h1>
         <% if (allBooks.size() > 0) {%>
+        <div class="container">
+        	<% for (Book b : allBooks){ %>
             
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="color: rgb(31,40,81);font-size: 18px;font-family: Lora, serif;">ID</th>
-                            <th style="color: rgb(31,40,81);font-size: 18px;">Title</th>
-                            <th style="color: rgb(31,40,81);font-size: 18px;">Author</th>
-                            <th style="color: rgb(31,40,81);font-size: 18px;">Category</th>
-                            <th style="color: rgb(31,40,81);font-size: 18px;">No of Copies</th>
-                            <th class="text-center" colspan="2" style="color: rgb(31,40,81);font-size: 18px;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <%for(Book book: allBooks){
-                    	Category c = categoryDaoImpl.getCategoryById(book.getCategory().getId());
-                    	%>
-                    
-                        <tr>
-                            <td style="color: rgb(14,16,18);"><%=book.getId() %></td>
-                            <td style="color: rgb(14,16,18);"><%=book.getTitle() %></td>
-                            <td style="color: rgb(14,16,18);"><%=book.getAuthor() %></td>
-                            <td style="color: rgb(14,16,18);"><%=c.getCategory() %></td>
-                            <td style="color: rgb(14,16,18);"><%=book.getNoOfCopies()%></td>
-                             <% // Book?id=<%=book.getId() && action=<%="update" %>
-                            <td style="width: 36px;"><a href="edit-book.jsp?id=<%=book.getId()%>" style="text-decoration: none;font-weight: bold;"><i class="fas fa-edit"></i></a></td>
-                            <td style="width: 36px;height: 49px;"><a href="Book?id=<%=book.getId()%>&&action=<%=action %>" style="color: red;font-weight: bold;"></a><a href="Book?id=<%=book.getId()%>&&action=<%=action %>" style="text-decoration: none;font-weight: bold;"><i class="material-icons" style="width: 11;height: 13;color: rgb(255,19,34);">delete</i></a></td>
-                        </tr>
-                        <tr></tr>
-                        <%} %>
-                    </tbody>
-                </table>
-            
+                <input style="margin: 10px" type="checkbox" name="selected" value=<%=b.getId() %>> <%=b.getTitle()%> 
+                
+                 
+            <%} %> 
+            </div>   
+            </form>    
             <%} else{ %>
             
             	<center><h1>No Books</h1></center>

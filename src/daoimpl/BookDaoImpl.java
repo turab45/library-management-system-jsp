@@ -27,13 +27,14 @@ public class BookDaoImpl implements BookDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO book(`title`,`author`,`no-of-copies`,category,`create_date`,created_by,status) VALUES(?,?,?,?,?,?,1)");
-            pstmt.setString(1, book.getTitle());
-            pstmt.setString(2, book.getAuthor());
-            pstmt.setInt(3, book.getNoOfCopies());
-            pstmt.setInt(4, book.getCategory().getId());
-            pstmt.setDate(5, createdDate);
-            pstmt.setInt(6, book.getCreatedBy().getId());
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO book(`book-code`,`title`,`author`,`no-of-copies`,category,`create_date`,created_by,status) VALUES(?,?,?,?,?,?,1)");
+            pstmt.setString(1, book.getBookCode());
+            pstmt.setString(2, book.getTitle());
+            pstmt.setString(3, book.getAuthor());
+            pstmt.setInt(4, book.getNoOfCopies());
+            pstmt.setInt(5, book.getCategory().getId());
+            pstmt.setDate(6, createdDate);
+            pstmt.setInt(7, book.getCreatedBy().getId());
            
                         
             row = pstmt.executeUpdate();
@@ -141,6 +142,7 @@ public class BookDaoImpl implements BookDao{
             	
 				book = new Book();
 				book.setId(rs.getInt("book-id"));
+				book.setBookCode(rs.getString("book-code"));
 				book.setTitle(rs.getString("title"));
 				book.setAuthor(rs.getString("author"));
 				book.setCategory(category);
@@ -181,6 +183,7 @@ public class BookDaoImpl implements BookDao{
             	
 				Book book = new Book();
 				book.setId(rs.getInt("book-id"));
+				book.setBookCode(rs.getString("book-code"));
 				book.setTitle(rs.getString("title"));
 				book.setAuthor(rs.getString("author"));
 				book.setCategory(category);

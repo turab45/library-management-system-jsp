@@ -23,13 +23,14 @@ public class StudentDaoImpl implements StudentDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO student(`name`,dateofbirth,contact,email,create_date,created_by,`status`) VALUES(?,?,?,?,?,?,1)");
-            pstmt.setString(1, student.getName());
-            pstmt.setDate(2, new Date(student.getDateOfBirth().getTime()));
-            pstmt.setString(3, student.getContact());
-            pstmt.setString(4, student.getEmail());
-            pstmt.setDate(5, createdDate);
-            pstmt.setInt(6, student.getCreatedBy().getId());
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO student(`roll-no`,`name`,dateofbirth,contact,email,create_date,created_by,`status`) VALUES(?,?,?,?,?,?,?,1)");
+            pstmt.setString(1, student.getRollNo());
+            pstmt.setString(2, student.getName());
+            pstmt.setDate(3, new Date(student.getDateOfBirth().getTime()));
+            pstmt.setString(4, student.getContact());
+            pstmt.setString(5, student.getEmail());
+            pstmt.setDate(6, createdDate);
+            pstmt.setInt(7, student.getCreatedBy().getId());
            
                         
             row = pstmt.executeUpdate();
@@ -49,14 +50,15 @@ public class StudentDaoImpl implements StudentDao{
             
             java.sql.Date createdDate = new Date(new java.util.Date().getTime());
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET `name`=?,dateofbirth=?,contact=?,email=?,update_date=?,updated_by=? WHERE id=?");
-            pstmt.setString(1, student.getName());
-            pstmt.setDate(2, new Date(student.getDateOfBirth().getTime()));
-            pstmt.setString(3, student.getContact());
-            pstmt.setString(4, student.getEmail());
-            pstmt.setDate(5, createdDate);
-            pstmt.setInt(6, student.getCreatedBy().getId());
-            pstmt.setInt(7, student.getId());
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE student SET `roll-no`=?,`name`=?,dateofbirth=?,contact=?,email=?,update_date=?,updated_by=? WHERE id=?");
+            pstmt.setString(1, student.getRollNo());
+            pstmt.setString(2, student.getName());
+            pstmt.setDate(3, new Date(student.getDateOfBirth().getTime()));
+            pstmt.setString(4, student.getContact());
+            pstmt.setString(5, student.getEmail());
+            pstmt.setDate(6, createdDate);
+            pstmt.setInt(7, student.getCreatedBy().getId());
+            pstmt.setInt(8, student.getId());
            
                         
             row = pstmt.executeUpdate();
@@ -124,6 +126,7 @@ public class StudentDaoImpl implements StudentDao{
             if (rs.next()) {
 				student = new Student();
 				student.setId(rs.getInt("id"));
+				student.setRollNo(rs.getString("roll-no"));
 				student.setName(rs.getString("name"));
 				student.setDateOfBirth(rs.getDate("dateofbirth"));
 				student.setContact(rs.getString("contact"));
@@ -164,6 +167,7 @@ public class StudentDaoImpl implements StudentDao{
 				Role r2 = new Role();
 				
 				student.setId(rs.getInt("id"));
+				student.setRollNo(rs.getString("roll-no"));
 				student.setName(rs.getString("name"));
 				student.setDateOfBirth(rs.getDate("dateofbirth"));
 				student.setContact(rs.getString("contact"));
@@ -192,6 +196,29 @@ public class StudentDaoImpl implements StudentDao{
             ex.printStackTrace();
         }
         return allStudent;
+	}
+
+	@Override
+	public Integer getIdByRollNo(String rollNo) {
+		Integer sid = null;
+		ResultSet rs = null;
+        try {
+        	
+            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM student WHERE `roll-no`=? and `status`=1");
+            pstmt.setString(1, rollNo);
+           
+                        
+            rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+				sid = rs.getInt("id");
+			}
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR: "+ex.getMessage());
+            ex.printStackTrace();
+        }
+        return sid;
 	}
 
 }

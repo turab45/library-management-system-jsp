@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,8 +37,10 @@ public class BookServlet extends HttpServlet {
 	CategoryDao categoryDaoImpl = new CategoryDaoImpl();
 	BookDao bookDaoImpl = new BookDaoImpl();
 	RoleDao roleDaoImpl = new RoleDaoImpl();
-	StudentDao studentDaoImpl = new StudentDaoImpl();
+	static StudentDao studentDaoImpl = new StudentDaoImpl();
 	IssueDao issueDaoImpl = new IssueDaoImpl();
+	
+	List<Student> allStudents = studentDaoImpl.getAllStudent();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -75,6 +80,7 @@ public class BookServlet extends HttpServlet {
 			Integer noOfCopies = Integer.parseInt(request.getParameter("no-of-copies"));
 			book = new Book();
 			book.setTitle(title);
+			book.setBookCode(generateBookCode());
 			book.setAuthor(author);
 			book.setCategory(category);
 			book.setNoOfCopies(noOfCopies);
@@ -120,28 +126,38 @@ public class BookServlet extends HttpServlet {
 			break;
 			
 		case "issue":
-			Integer bookId = Integer.parseInt(request.getParameter("book-id"));
-			Integer studentId = Integer.parseInt(request.getParameter("student-id"));
+			String[] selectedStudentIds = request.getParameterValues("selected");
 			
-			Book book2 = bookDaoImpl.getBookById(bookId);
+			String studentRoll = request.getParameter("student-roll-no");
+			
+			Integer studentId = studentDaoImpl.getIdByRollNo(studentRoll);
+			
+			
 			Student student = studentDaoImpl.getStudentById(studentId);
 			
-			Role createdBy = roleDaoImpl.getRoleById(u.getRole().getId());
-			
-			Issue issue = new Issue();
-			issue.setBook(book2);
-			issue.setStudent(student);
-			issue.setCreatedBy(createdBy);
-			issue.setIssuedBy(u);
-			
-			result = issueDaoImpl.addIssue(issue);
-			
+			for(int i=0; i<selectedStudentIds.length; i++) {
+				Integer bookId = Integer.parseInt(selectedStudentIds[i]);
+				
+				Book book2 = bookDaoImpl.getBookById(bookId);
+				Role createdBy = roleDaoImpl.getRoleById(u.getRole().getId());
+				
+				Issue issue = new Issue();
+				issue.setBook(book2);
+				issue.setStudent(student);
+				issue.setCreatedBy(createdBy);
+				issue.setIssuedBy(u);
+				
+				result = issueDaoImpl.addIssue(issue);
+	
+
+			}
 			if (result > 0) {
-				response.sendRedirect("view-book.jsp");
+				response.sendRedirect("view-issued-book.jsp");
 			}else {
 				response.getWriter().print("Error in deleting book!");
 			}
-			break;
+			
+						break;
 		}
 	}
 
@@ -152,5 +168,32 @@ public class BookServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	static public String generateBookCode() {
 
+        String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numbers = "0123456789";
+
+        // Using random method 
+        Random rndm_method = new Random();
+
+        String code = "";
+
+        for (int i = 0; i < 6; i++) {
+            // Use of charAt() method : to get character value 
+            // Use of nextInt() as it is scanning the value as int
+            if (i == 2) {
+                code += "-";
+            }
+            if (i == 0 || i == 1) {
+            	code += Capital_chars.charAt(rndm_method.nextInt(Capital_chars.length()));
+            } else {
+            	code += numbers.charAt(rndm_method.nextInt(numbers.length()));
+            }
+        }
+        return code;
+    }
+	
+	
+	
 }

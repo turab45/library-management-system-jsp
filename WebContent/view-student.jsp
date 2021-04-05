@@ -45,7 +45,7 @@ System.out.println("Student size: "+allStudent.size());
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th style="color: rgb(31,40,81);font-size: 18px;font-family: Lora, serif;">ID</th>
+                            <th style="color: rgb(31,40,81);font-size: 18px;font-family: Lora, serif;">Roll No</th>
                             <th style="color: rgb(31,40,81);font-size: 18px;">Name</th>
                             <th style="color: rgb(31,40,81);font-size: 18px;">Date of birth</th>
                             <th style="color: rgb(31,40,81);font-size: 18px;">Contact</th>
@@ -69,7 +69,7 @@ System.out.println("Student size: "+allStudent.size());
                     	if(s.getUpdatedBy() != null){
                     	updatedBy = roleDaoImpl.getRoleById(s.getUpdatedBy().getId());} %>
                         <tr>
-                            <td style="color: rgb(14,16,18);"><%=s.getId() %></td>
+                            <td style="color: rgb(14,16,18);"><%=s.getRollNo() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getName() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getDateOfBirth() %></td>
                             <td style="color: rgb(14,16,18);"><%=s.getContact() %></td>

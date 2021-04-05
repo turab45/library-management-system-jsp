@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Book {
 	private Integer id;
+	private String bookCode;
 	private String title;
 	private String author;
 	private Integer noOfCopies;
@@ -13,6 +14,14 @@ public class Book {
 	private Date updateDate;
 	private Role updatedBy;
 	private int status;
+	
+	
+	public String getBookCode() {
+		return bookCode;
+	}
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -11,5 +11,7 @@ public interface StudentDao {
 	public Integer getIdByName(Integer id);
 	public Student getStudentById(Integer id);
 	public List<Student> getAllStudent();
+	public Integer getIdByRollNo(String rollNo);
+	
 
 }
